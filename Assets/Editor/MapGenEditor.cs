@@ -22,5 +22,6 @@ public class MapGenEditor : Editor{
         {
             mapGen.DrawMapInEditor();
         }
+
     }
 }

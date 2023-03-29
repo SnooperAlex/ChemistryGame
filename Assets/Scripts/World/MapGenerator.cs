@@ -9,6 +9,8 @@ public class MapGenerator : MonoBehaviour {
 	public enum DrawMode {NoiseMap, ColourMap, Mesh};
 	public DrawMode drawMode;
 
+	public Noise.NormalizeMode normalizeMode;
+
 	public const int mapChunkSize = 241;
 	[Range(0,6)]
 	public int editorPreviewLOD;
@@ -34,6 +36,7 @@ public class MapGenerator : MonoBehaviour {
 
 	public void DrawMapInEditor() {
 		MapData mapData = GenerateMapData (Vector2.zero);
+		TreeGenerator tregen = FindObjectOfType<TreeGenerator>();
 
 		MapDisplay display = FindObjectOfType<MapDisplay> ();
 		if (drawMode == DrawMode.NoiseMap) {
@@ -42,6 +45,7 @@ public class MapGenerator : MonoBehaviour {
 			display.DrawTexture (TextureGenerator.TextureFromColourMap (mapData.colourMap, mapChunkSize, mapChunkSize));
 		} else if (drawMode == DrawMode.Mesh) {
 			display.DrawMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, meshHeightMultiplier, meshHeightCurve, editorPreviewLOD), TextureGenerator.TextureFromColourMap (mapData.colourMap, mapChunkSize, mapChunkSize));
+			tregen.Generate();
 		}
 	}
 
@@ -74,6 +78,7 @@ public class MapGenerator : MonoBehaviour {
 			meshDataThreadInfoQueue.Enqueue (new MapThreadInfo<MeshData> (callback, meshData));
 		}
 	}
+	
 
 	void Update() {
 		if (mapDataThreadInfoQueue.Count > 0) {
@@ -92,15 +97,17 @@ public class MapGenerator : MonoBehaviour {
 	}
 
 	MapData GenerateMapData(Vector2 centre) {
-		float[,] noiseMap = Noise.GenerateNoiseMap (mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, centre + offset);
+		float[,] noiseMap = Noise.GenerateNoiseMap (mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, centre + offset, normalizeMode);
 
 		Color[] colourMap = new Color[mapChunkSize * mapChunkSize];
 		for (int y = 0; y < mapChunkSize; y++) {
 			for (int x = 0; x < mapChunkSize; x++) {
 				float currentHeight = noiseMap [x, y];
 				for (int i = 0; i < regions.Length; i++) {
-					if (currentHeight <= regions [i].height) {
+					if (currentHeight >= regions [i].height) {
 						colourMap [y * mapChunkSize + x] = regions [i].colour;
+						
+					} else {
 						break;
 					}
 				}
