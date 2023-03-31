@@ -88,11 +88,12 @@ public class EndlessTerrain : MonoBehaviour {
 
 		public TerrainChunk(Vector2 coord, int size, LODInfo[] detailLevels, Transform parent, Material material) {
 			this.detailLevels = detailLevels;
-
 			position = coord * size;
 			bounds = new Bounds(position,Vector2.one * size);
 			Vector3 positionV3 = new Vector3(position.x,0,position.y);
 
+			treeGen = FindObjectOfType<TreeGenerator>();
+				
 			meshObject = new GameObject("Terrain Chunk");
 			meshRenderer = meshObject.AddComponent<MeshRenderer>();
 			meshFilter = meshObject.AddComponent<MeshFilter>();
@@ -110,6 +111,7 @@ public class EndlessTerrain : MonoBehaviour {
 			}
 
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
+			treeGen.CreateRaysData(position);
 		}
 
 		void OnMapDataReceived(MapData mapData) {
@@ -128,6 +130,7 @@ public class EndlessTerrain : MonoBehaviour {
 			if (mapDataReceived) {
 				float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;
+				treeGen = FindObjectOfType<TreeGenerator>();
 
 				if (visible) {
 					int lodIndex = 0;
@@ -153,13 +156,18 @@ public class EndlessTerrain : MonoBehaviour {
 
 					terrainChunksVisibleLastUpdate.Add(this);
 				}
-
+				
 				SetVisible (visible);
+				treeGen.GenerateTrees();
+		
+				
 			}
 		}
 
 		public void SetVisible(bool visible) {
+			treeGen = FindObjectOfType<TreeGenerator>();
 			meshObject.SetActive (visible);
+			treeGen.SetTreesVisible(visible);
 		}
 
 		public bool IsVisible() {
