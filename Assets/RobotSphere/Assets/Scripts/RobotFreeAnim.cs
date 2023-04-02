@@ -30,31 +30,36 @@ public class RobotFreeAnim : MonoBehaviour {
 		CheckKey();
 		gameObject.transform.eulerAngles = rot;
 		
-		if(Mathf.Abs(transform.position.x - Player.transform.position.x) > 3){
+		if(Vector3.Distance (Player.transform.position, transform.position) > 3 && Vector3.Distance (Player.transform.position, transform.position) < 25  && anim.GetBool("Roll_Anim") == false ){
+			transform.LookAt(Player.transform);
+			while (rot[1] < transform.eulerAngles.y)
+			{
+				rot[1] += rotSpeed * Time.fixedDeltaTime;
+			}
+			while (rot[1] > transform.eulerAngles.y)
+			{
+				rot[1] -= rotSpeed * Time.fixedDeltaTime;
+			}
+			anim.SetBool("Walk_Anim", true);
+			transform.position += transform.forward * 3f * Time.deltaTime;
+
+		}
+		else if (Vector3.Distance(Player.transform.position, transform.position) > 25 || anim.GetBool("Roll_Anim") && Vector3.Distance(Player.transform.position, transform.position) > 5)
+		{
+			anim.SetBool("Walk_Anim", false);
+			anim.SetBool("Roll_Anim", true);
 			transform.LookAt(Player.transform);
 			transform.position += transform.forward * 10f * Time.deltaTime;
 		}
-	
-
-		if (old_pos < transform.position.x)
+		else if (Vector3.Distance(Player.transform.position, transform.position) < 5 && anim.GetBool("Roll_Anim"))
 		{
-			anim.SetBool("Walk_Anim", true);
+			anim.SetBool("Roll_Anim", false);
 		}
 		else
 		{
 			anim.SetBool("Walk_Anim", false);
 		}
 		
-		if (old_pos > transform.position.x)
-		{
-			anim.SetBool("Walk_Anim", true);
-		}
-		else
-		{
-			anim.SetBool("Walk_Anim", false);
-		}
-
-		old_pos = transform.position.x;
 	}
 
 	void CheckKey()
