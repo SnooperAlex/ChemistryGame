@@ -30,8 +30,11 @@ public class RobotFreeAnim : MonoBehaviour {
 		CheckKey();
 		gameObject.transform.eulerAngles = rot;
 		
-		transform.LookAt(Player.transform);
-		transform.position += transform.forward * 10f * Time.deltaTime;
+		if(Mathf.Abs(transform.position.x - Player.transform.position.x) > 3){
+			transform.LookAt(Player.transform);
+			transform.position += transform.forward * 10f * Time.deltaTime;
+		}
+	
 
 		if (old_pos < transform.position.x)
 		{
