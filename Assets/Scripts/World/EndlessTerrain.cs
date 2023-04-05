@@ -82,6 +82,8 @@ public class EndlessTerrain : MonoBehaviour {
 
 		MapData mapData;
 		TreeGenerator treeGen;
+		RockGenerator rockGen;
+		GrassGenerator grassGen;
 		
 		bool mapDataReceived;
 		int previousLODIndex = -1;
@@ -93,6 +95,8 @@ public class EndlessTerrain : MonoBehaviour {
 			Vector3 positionV3 = new Vector3(position.x,0,position.y);
 
 			treeGen = FindObjectOfType<TreeGenerator>();
+			rockGen = FindObjectOfType<RockGenerator>();
+			grassGen = FindObjectOfType<GrassGenerator>();
 				
 			meshObject = new GameObject("Terrain Chunk");
 			meshRenderer = meshObject.AddComponent<MeshRenderer>();
@@ -112,6 +116,8 @@ public class EndlessTerrain : MonoBehaviour {
 
 			mapGenerator.RequestMapData(position,OnMapDataReceived);
 			treeGen.CreateRaysData(position);
+			rockGen.CreateRaysData(position);
+			grassGen.CreateRaysData(position);
 		}
 
 		void OnMapDataReceived(MapData mapData) {
@@ -131,6 +137,8 @@ public class EndlessTerrain : MonoBehaviour {
 				float viewerDstFromNearestEdge = Mathf.Sqrt (bounds.SqrDistance (viewerPosition));
 				bool visible = viewerDstFromNearestEdge <= maxViewDst;
 				treeGen = FindObjectOfType<TreeGenerator>();
+				rockGen = FindObjectOfType<RockGenerator>();
+				grassGen = FindObjectOfType<GrassGenerator>();
 
 				if (visible) {
 					int lodIndex = 0;
@@ -159,6 +167,8 @@ public class EndlessTerrain : MonoBehaviour {
 				
 				SetVisible (visible);
 				treeGen.GenerateTrees();
+				grassGen.GenerateTrees();
+				rockGen.GenerateTrees();
 		
 				
 			}
@@ -166,8 +176,12 @@ public class EndlessTerrain : MonoBehaviour {
 
 		public void SetVisible(bool visible) {
 			treeGen = FindObjectOfType<TreeGenerator>();
+			rockGen = FindObjectOfType<RockGenerator>();
+			grassGen = FindObjectOfType<GrassGenerator>();
 			meshObject.SetActive (visible);
 			treeGen.SetTreesVisible(visible);
+			rockGen.SetTreesVisible(visible);
+			grassGen.SetTreesVisible(visible);
 		}
 
 		public bool IsVisible() {

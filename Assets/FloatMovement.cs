@@ -19,14 +19,8 @@ void Start () {
 }
 
 // Update is called once per frame
-void Update () {
-// Spin object around Y-Axis
-    transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
-
-    // Float up/down with a Sin()
-    tempPos = posOffset;
-    tempPos.y += Mathf.Sin (Time.fixedTime * Mathf.PI * frequency) * amplitude;
-
-    transform.position = tempPos;
+    void Update()
+    {
+        transform.position = new Vector3(posOffset.x, Mathf.Sin(Time.time * frequency) * amplitude + posOffset.y, 0);
     }
 }

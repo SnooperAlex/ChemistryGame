@@ -8,7 +8,8 @@ public class InteractableObject : MonoBehaviour
     public bool playerInRange;
 
     public GameObject player;
-
+    
+    
 
 
     public string GetItemName()
@@ -24,9 +25,6 @@ public class InteractableObject : MonoBehaviour
             Debug.Log("Suck");
             GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
         }
-
-
-
 
 
     }

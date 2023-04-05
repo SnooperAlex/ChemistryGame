@@ -37,6 +37,8 @@ public class MapGenerator : MonoBehaviour {
 	public void DrawMapInEditor() {
 		MapData mapData = GenerateMapData (Vector2.zero);
 		TreeGenerator tregen = FindObjectOfType<TreeGenerator>();
+		RockGenerator rockGen = FindObjectOfType<RockGenerator>();
+		GrassGenerator grassGen = FindObjectOfType<GrassGenerator>();
 
 		MapDisplay display = FindObjectOfType<MapDisplay> ();
 		if (drawMode == DrawMode.NoiseMap) {
@@ -46,6 +48,8 @@ public class MapGenerator : MonoBehaviour {
 		} else if (drawMode == DrawMode.Mesh) {
 			display.DrawMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, meshHeightMultiplier, meshHeightCurve, editorPreviewLOD), TextureGenerator.TextureFromColourMap (mapData.colourMap, mapChunkSize, mapChunkSize));
 			tregen.Generate();
+			grassGen.Generate();
+			rockGen.Generate();
 		}
 	}
 
