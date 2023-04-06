@@ -6,10 +6,13 @@ using Random = UnityEngine.Random;
 
 public class PickUpController : MonoBehaviour
 {
+    public InventoryManager inventoryManager;
+    public Item item;
+    
     public Instruments instrumentScript;
     public Rigidbody rb;
     public BoxCollider coll;
-    public Transform player, gunContainer, fpsCam;
+    public Transform player, gunContainer, fpsCam, notSelectedContainer;
 
     public float pickUpRange;
     public float dropForwardForce, dropUpwardForce;
@@ -39,7 +42,7 @@ public class PickUpController : MonoBehaviour
     private void Update()
     {
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull)
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E))
         {
             PickUp();
         }
@@ -48,45 +51,79 @@ public class PickUpController : MonoBehaviour
         {
             Drop();
         }
+
+        Item slotItem = inventoryManager.GetSelectedItem(false);
+        if (slotItem == item && equipped)
+        {
+            Debug.Log("YES");
+            transform.SetParent(gunContainer);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+            transform.localScale = Vector3.one;
+            instrumentScript.enabled = true;
+        }
         
+        if(equipped && slotItem != item )
+        {
+            Debug.Log("NO");
+            transform.SetParent(notSelectedContainer);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+            transform.localScale = Vector3.one;
+            instrumentScript.enabled = false;
+        }
+
+
     }
 
     private void PickUp()
-    {
-        equipped = true;
-        slotFull = true;
+    {   
+        bool result = inventoryManager.AddItem(item);
+        if (result == true)
+        {
+            equipped = true;
+            slotFull = true;
         
-        transform.SetParent(gunContainer);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
+            transform.SetParent(gunContainer);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+            transform.localScale = Vector3.one;
 
         
-        rb.isKinematic = true;
-        coll.isTrigger = true;
-
-        instrumentScript.enabled = true;
+            rb.isKinematic = true;
+            coll.isTrigger = true;
+        }
+        else
+        {
+            Debug.Log("Inventory full");
+        }
     }
 
     private void Drop()
     {
-        equipped = false;
-        slotFull = false;
-        
-        transform.SetParent(null);
+        Item slotItem = inventoryManager.GetSelectedItem(false);
+        if (slotItem == item && equipped)
+        {
+            equipped = false;
+            slotFull = false;
 
-        rb.isKinematic = false;
-        coll.isTrigger = false;
+            transform.SetParent(null);
 
-        rb.velocity = player.GetComponent<Rigidbody>().velocity;
+            rb.isKinematic = false;
+            coll.isTrigger = false;
 
-        rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
-        rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
-       
+            rb.velocity = player.GetComponent<Rigidbody>().velocity;
 
-        float random = Random.Range(-1f, 1f);
-        rb.AddTorque(new Vector3(random,random,random)*10);
+            rb.AddForce(fpsCam.forward * dropForwardForce, ForceMode.Impulse);
+            rb.AddForce(fpsCam.up * dropUpwardForce, ForceMode.Impulse);
 
-        instrumentScript.enabled = false;
+
+            float random = Random.Range(-1f, 1f);
+            rb.AddTorque(new Vector3(random, random, random) * 10);
+            
+            instrumentScript.enabled = false;
+        }
+
+        inventoryManager.GetSelectedItem(true);
     }
 }
