@@ -16,18 +16,7 @@ public class InteractableObject : MonoBehaviour
     {
         return itemName;
     }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Mouse1) && playerInRange)
-        {   
-            Vector3 dir = (player.transform.position - transform.position).normalized;
-            Debug.Log("Suck");
-            GetComponent<Rigidbody>().AddForce(dir, ForceMode.Impulse);
-        }
-
-
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))

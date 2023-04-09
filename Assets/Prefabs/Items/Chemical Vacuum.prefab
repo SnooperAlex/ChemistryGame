@@ -316,15 +316,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6924351255624728763}
-  m_LocalRotation: {x: -0.035801474, y: -0.8540607, z: 0.109117754, w: 0.50733817}
+  m_LocalRotation: {x: -0.03580118, y: -0.85405874, z: 0.109114185, w: 0.5073421}
   m_LocalPosition: {x: 59.674, y: 2.328, z: 75.728}
-  m_LocalScale: {x: 0.15434927, y: 0.15434918, z: 0.1543493}
+  m_LocalScale: {x: 0.1409861, y: 0.14098604, z: 0.14098614}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6924351255016872233}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -1.067, y: -3.207, z: 1.189}
+  m_LocalEulerAnglesHint: {x: 8.63, y: -117.819, z: 10.011}
 --- !u!54 &6924351255624728775
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -366,12 +366,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82003ce52d7b52e4c8ebdbdb67f1cb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryManager: {fileID: 0}
+  item: {fileID: 11400000, guid: 7387861d1b7f2544e89c485e79803d63, type: 2}
   instrumentScript: {fileID: 6924351255624728774}
   rb: {fileID: 6924351255624728775}
   coll: {fileID: 6924351255624728768}
   player: {fileID: 0}
   gunContainer: {fileID: 0}
   fpsCam: {fileID: 0}
+  notSelectedContainer: {fileID: 0}
   pickUpRange: 4
   dropForwardForce: 5
   dropUpwardForce: 2
@@ -388,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d607edcede11ee44b537f487440be63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 0}
 --- !u!1 &6924351255788082798
 GameObject:
   m_ObjectHideFlags: 0

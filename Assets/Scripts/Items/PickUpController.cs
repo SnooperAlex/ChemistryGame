@@ -55,7 +55,6 @@ public class PickUpController : MonoBehaviour
         Item slotItem = inventoryManager.GetSelectedItem(false);
         if (slotItem == item && equipped)
         {
-            Debug.Log("YES");
             transform.SetParent(gunContainer);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.Euler(Vector3.zero);
@@ -65,7 +64,6 @@ public class PickUpController : MonoBehaviour
         
         if(equipped && slotItem != item )
         {
-            Debug.Log("NO");
             transform.SetParent(notSelectedContainer);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.Euler(Vector3.zero);

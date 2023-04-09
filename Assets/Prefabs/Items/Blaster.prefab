@@ -512,9 +512,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7192192714151472314}
-  m_LocalRotation: {x: 0.00029860434, y: 0.037155148, z: -0.02492797, w: 0.9989985}
+  m_LocalRotation: {x: 0.0002958049, y: 0.037150938, z: -0.024931427, w: 0.9989986}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.15434924, y: 0.15434918, z: 0.15434927}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7192192713921482601}
@@ -563,16 +563,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82003ce52d7b52e4c8ebdbdb67f1cb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryManager: {fileID: 0}
+  item: {fileID: 11400000, guid: a4c5ece964e837a46b848b473d0c309d, type: 2}
   instrumentScript: {fileID: 7192192714151472319}
   rb: {fileID: 7192192714151472317}
   coll: {fileID: 7192192714151472316}
   player: {fileID: 0}
   gunContainer: {fileID: 0}
   fpsCam: {fileID: 0}
+  notSelectedContainer: {fileID: 0}
   pickUpRange: 3
   dropForwardForce: 5
   dropUpwardForce: 2
-  equipped: 1
+  equipped: 0
 --- !u!114 &7192192714151472319
 MonoBehaviour:
   m_ObjectHideFlags: 0
