@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class PickUpController : MonoBehaviour
 {
+    public GameObject scannerUi;
     public InventoryManager inventoryManager;
     public Item item;
     
@@ -100,6 +101,10 @@ public class PickUpController : MonoBehaviour
     private void Drop()
     {
         Item slotItem = inventoryManager.GetSelectedItem(false);
+        if (item.name == "Scanner" && equipped)
+        {
+            scannerUi.SetActive(false);
+        }
         if (slotItem == item && equipped)
         {
             equipped = false;
@@ -121,6 +126,7 @@ public class PickUpController : MonoBehaviour
             
             instrumentScript.enabled = false;
         }
+        
 
         inventoryManager.GetSelectedItem(true);
     }

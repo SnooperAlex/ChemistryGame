@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2a19b1793571f43b2d64822d9560ea, type: 3}
   m_Name: Chemical Vacuum
   m_EditorClassIdentifier: 
+  name: Chemical Vacuum
   tile: {fileID: 0}
   type: 0
   actionType: 0

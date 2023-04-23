@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,8 @@ public class SelectionManager : MonoBehaviour
  
     public GameObject interaction_Info_UI;
     Text interaction_text;
+
+    private GameObject atom;
  
     private void Start()
     {
@@ -28,6 +31,13 @@ public class SelectionManager : MonoBehaviour
             else 
             { 
                 interaction_Info_UI.SetActive(false);
+            }
+
+            if (selectionTransform.tag == "Chemical" && Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                atom = selectionTransform.GameObject();
+                ChemicalAtom atomInfo = atom.GetComponent<ChemicalAtom>();
+                atomInfo.AssignInfo();
             }
  
         }

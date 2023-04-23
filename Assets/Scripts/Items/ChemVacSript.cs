@@ -45,7 +45,7 @@ public class ChemVacSript : Instruments
             {
                 Debug.Log("Suck");
                 Vector3 pos = selectionTransform.GameObject().transform.position;
-                selectionTransform.GameObject().transform.position = Vector3.MoveTowards(pos, target.position, 8f * Time.deltaTime);
+                selectionTransform.GameObject().transform.position = Vector3.MoveTowards(pos, target.position, 15f * Time.deltaTime);
 
             }
 

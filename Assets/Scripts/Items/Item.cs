@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(menuName = "Scriptable object/Item")]
 public class Item : ScriptableObject
 {
-    [Header("Only gameplay")]
+    [Header("Only gameplay")] 
+    public string name;
     public TileBase tile;
     public ItemType type;
     public ActionType actionType;
