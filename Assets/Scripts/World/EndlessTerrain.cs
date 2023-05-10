@@ -35,8 +35,10 @@ public class EndlessTerrain : MonoBehaviour {
 	}
 
 	void Update() {
+		//Detect the player's position in game's space
 		viewerPosition = new Vector2 (viewer.position.x, viewer.position.z) / scale;
-
+		
+		//Update the visible chunks, if the player moves into a different chunk, it will make the furthest chunk invisible
 		if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrViewerMoveThresholdForChunkUpdate) {
 			viewerPositionOld = viewerPosition;
 			UpdateVisibleChunks ();
@@ -44,19 +46,21 @@ public class EndlessTerrain : MonoBehaviour {
 	}
 		
 	void UpdateVisibleChunks() {
-
+		
 		for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++) {
 			terrainChunksVisibleLastUpdate [i].SetVisible (false);
 		}
 		terrainChunksVisibleLastUpdate.Clear ();
-			
+		
+		// find the current coordinates of the chunk the player is in
 		int currentChunkCoordX = Mathf.RoundToInt (viewerPosition.x / chunkSize);
 		int currentChunkCoordY = Mathf.RoundToInt (viewerPosition.y / chunkSize);
 
 		for (int yOffset = -chunksVisibleInViewDst; yOffset <= chunksVisibleInViewDst; yOffset++) {
 			for (int xOffset = -chunksVisibleInViewDst; xOffset <= chunksVisibleInViewDst; xOffset++) {
 				Vector2 viewedChunkCoord = new Vector2 (currentChunkCoordX + xOffset, currentChunkCoordY + yOffset);
-
+				
+				//If the chunk is already visible, then just update it, therefore it can change the level of detail if its further away. Else add a new terrain in the dictionary
 				if (terrainChunkDictionary.ContainsKey (viewedChunkCoord)) {
 					terrainChunkDictionary [viewedChunkCoord].UpdateTerrainChunk ();
 				} else {
@@ -66,7 +70,9 @@ public class EndlessTerrain : MonoBehaviour {
 			}
 		}
 	}
-
+	
+	
+	// Terrain chunk class
 	public class TerrainChunk {
 
 		GameObject meshObject;

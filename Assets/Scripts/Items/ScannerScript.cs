@@ -19,6 +19,7 @@ public class ScannerScript : Instruments
     void Update()
     {
         Item slotItem = inventoryManager.GetSelectedItem(false);
+        Debug.Log(slotItem.name);
         if (slotItem == item )
         {
             ui.SetActive(true);

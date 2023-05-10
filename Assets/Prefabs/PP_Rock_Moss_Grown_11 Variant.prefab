@@ -7,6 +7,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[1]
+      value: 
+      objectReference: {fileID: 8197367512536695060, guid: 9bff7bb1a534ad84fb323b23244ae7f9, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[2]
+      value: 
+      objectReference: {fileID: 8197367512536695060, guid: 9bff7bb1a534ad84fb323b23244ae7f9, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[3]
+      value: 
+      objectReference: {fileID: 8373023913634225625, guid: 8bdc222568664bf458968e1f51feb9e6, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[4]
+      value: 
+      objectReference: {fileID: 8373023913634225625, guid: 8bdc222568664bf458968e1f51feb9e6, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[5]
+      value: 
+      objectReference: {fileID: 8373023913634225625, guid: 8bdc222568664bf458968e1f51feb9e6, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[6]
+      value: 
+      objectReference: {fileID: 3329968838885890796, guid: cca8cdd9501e71949b30967b6d3d754a, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[7]
+      value: 
+      objectReference: {fileID: 3329968838885890796, guid: cca8cdd9501e71949b30967b6d3d754a, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[8]
+      value: 
+      objectReference: {fileID: 2662688199807666663, guid: 5732fe3f749a9ba4187b271b0b059fb9, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[9]
+      value: 
+      objectReference: {fileID: 5943551497569021164, guid: f2cc09b4253ab7846befa643b1ee480a, type: 3}
+    - target: {fileID: 3489435852357695583, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
+      propertyPath: chemAtoms.Array.data[10]
+      value: 
+      objectReference: {fileID: 7914805353711029424, guid: 7a3904a4f3905804e9dcab3d91947c74, type: 3}
     - target: {fileID: 3836581064361698930, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4500668923149335752, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}
       propertyPath: m_Name
-      value: PP_Rock_Moss_Grown_11
+      value: PP_Rock_Moss_Grown_11 Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a524090786e7ba545bd5ce3d24c9a3fb, type: 3}

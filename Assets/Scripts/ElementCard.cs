@@ -8,5 +8,7 @@ public class ElementCard : ScriptableObject
     public string name;
 
     public Sprite elementIcon;
-    
+
+    public string type;
+
 }

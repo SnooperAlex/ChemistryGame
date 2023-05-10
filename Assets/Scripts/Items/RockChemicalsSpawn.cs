@@ -13,7 +13,7 @@ public class RockChemicalsSpawn : MonoBehaviour
 
     public void SpawnChemical()
     {
-        GameObject atom = Instantiate(chemAtoms[Random.Range(0, 3)], spawner.transform.position, Quaternion.identity);
+        GameObject atom = Instantiate(chemAtoms[Random.Range(0, chemAtoms.Length)], spawner.transform.position, Quaternion.identity);
         Rigidbody rb = atom.GetComponent<Rigidbody>();
         rb.AddForce(transform.up * 2, ForceMode.Impulse);
         

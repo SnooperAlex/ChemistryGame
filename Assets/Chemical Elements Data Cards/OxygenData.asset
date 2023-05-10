@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Oxygen
   elementIcon: {fileID: 21300000, guid: f810fcd49ba2d344c9386188b87ead58, type: 3}
+  type: 'Type: Reactive Non-Metal'

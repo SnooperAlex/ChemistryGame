@@ -1,0 +1,34 @@
+{
+    "name": "InputSystem",
+    "maps": [
+        {
+            "name": "PlayerMovement",
+            "id": "e58d5a8d-9778-41c1-8743-e2915fed7257",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "657556f1-452a-4d40-ad95-de68c2cd9bdb",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2c9e5dec-1d2d-4eb7-9f32-fbd5cca072d0",
+                    "path": "<XInputController>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

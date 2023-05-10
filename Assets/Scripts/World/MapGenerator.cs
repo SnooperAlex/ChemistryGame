@@ -5,7 +5,7 @@ using System.Threading;
 using System.Collections.Generic;
 
 public class MapGenerator : MonoBehaviour {
-
+	
 	public enum DrawMode {NoiseMap, ColourMap, Mesh};
 	public DrawMode drawMode;
 
@@ -34,19 +34,29 @@ public class MapGenerator : MonoBehaviour {
 	Queue<MapThreadInfo<MapData>> mapDataThreadInfoQueue = new Queue<MapThreadInfo<MapData>>();
 	Queue<MapThreadInfo<MeshData>> meshDataThreadInfoQueue = new Queue<MapThreadInfo<MeshData>>();
 
+	
+	//Draw the map depending on the DrawMode. NoiseMap to draw the noise texture on a plane, ColourMap to draw the correct colours of the map on a 2D texture depending on the noise, 
+	//Mesh to create the mesh with the set colours from colourmap. 
 	public void DrawMapInEditor() {
+		
+		//Generate the map data
 		MapData mapData = GenerateMapData (Vector2.zero);
+		
+		//Find the objects generators components
 		TreeGenerator tregen = FindObjectOfType<TreeGenerator>();
 		RockGenerator rockGen = FindObjectOfType<RockGenerator>();
 		GrassGenerator grassGen = FindObjectOfType<GrassGenerator>();
-
+		
 		MapDisplay display = FindObjectOfType<MapDisplay> ();
+		
 		if (drawMode == DrawMode.NoiseMap) {
 			display.DrawTexture (TextureGenerator.TextureFromHeightMap (mapData.heightMap));
 		} else if (drawMode == DrawMode.ColourMap) {
 			display.DrawTexture (TextureGenerator.TextureFromColourMap (mapData.colourMap, mapChunkSize, mapChunkSize));
 		} else if (drawMode == DrawMode.Mesh) {
 			display.DrawMesh (MeshGenerator.GenerateTerrainMesh (mapData.heightMap, meshHeightMultiplier, meshHeightCurve, editorPreviewLOD), TextureGenerator.TextureFromColourMap (mapData.colourMap, mapChunkSize, mapChunkSize));
+			
+			//When the mesh is drawn, generate the starting point for the trees rays
 			tregen.Generate();
 			grassGen.Generate();
 			rockGen.Generate();
@@ -83,7 +93,7 @@ public class MapGenerator : MonoBehaviour {
 		}
 	}
 	
-
+	
 	void Update() {
 		if (mapDataThreadInfoQueue.Count > 0) {
 			for (int i = 0; i < mapDataThreadInfoQueue.Count; i++) {
@@ -117,8 +127,6 @@ public class MapGenerator : MonoBehaviour {
 				}
 			}
 		}
-
-	
 		return new MapData (noiseMap, colourMap);
 	}
 

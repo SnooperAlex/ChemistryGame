@@ -54,6 +54,10 @@ public class PickUpController : MonoBehaviour
         }
 
         Item slotItem = inventoryManager.GetSelectedItem(false);
+        if (slotItem != item)
+        {
+            scannerUi.SetActive(false);
+        }
         if (slotItem == item && equipped)
         {
             transform.SetParent(gunContainer);
@@ -101,7 +105,7 @@ public class PickUpController : MonoBehaviour
     private void Drop()
     {
         Item slotItem = inventoryManager.GetSelectedItem(false);
-        if (item.name == "Scanner" && equipped)
+        if (slotItem.name == "Scanner" && equipped)
         {
             scannerUi.SetActive(false);
         }
